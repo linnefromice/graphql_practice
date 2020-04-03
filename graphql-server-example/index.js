@@ -1,6 +1,6 @@
 const { ApolloServer, gql } = require('apollo-server');
 
-const typeDef = gql`
+const typeDefs = gql`
     # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
     # This "Book" type defines the queryable fields for every book in our data source.
@@ -35,7 +35,7 @@ const resolvers = {
 };
 // The ApolloServer constructor requires two parameters:
 // your schema definition and your set of resolvers.
-const server = new ApolloServer({ typeDef, resolvers });
+const server = new ApolloServer({ typeDefs, resolvers });
 
 // The `listen` method launches a web server.
 server.listen().then(({ url }) => {
