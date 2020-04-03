@@ -1,1 +1,1 @@
-"# graphql_practice" 
+# graphql_practice
