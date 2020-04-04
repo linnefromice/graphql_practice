@@ -32,11 +32,29 @@ const books = [
         author: 'Michael Crichton',
     }
 ];
+const authors = [
+    {
+        name: 'J.K. Rowling',
+        books: [{
+            title: 'Harry Potter and the Chamber of Secrets',
+            author: 'J.K. Rowling',
+        }],
+    },
+    {
+        name: 'Michael Crichton',
+        books: [{
+            title: 'Jurassic Park',
+            author: 'Michael Crichton',
+        }],
+    }
+];
+
 // Resolvers define the technique for fetching the types defined in the schema.
 // This resolver retrieves books from the "books" array above.
 const resolvers = {
     Query: {
         books: () => books,
+        authors: () => authors
     },
 };
 // The ApolloServer constructor requires two parameters:
