@@ -27,10 +27,12 @@ let messages = {
     1: {
         id: '1',
         text: 'Hello World',
+        userId: '1',
     },
     2: {
         id: '2',
-        text: 'By World'
+        text: 'By World',
+        userId: '2',
     },
 }
 let users = {
@@ -82,8 +84,8 @@ const resolvers = {
         }
     },
     Message: {
-        user: (parent, args, { me }) => {
-            return me;
+        user: message => {
+            return users[message.userId];
         }
     }
 };
