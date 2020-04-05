@@ -20,6 +20,13 @@ const resolvers = {
         }
     }
 };
+/*
+const datas = {
+    me: {
+        username: 'Robin Wierich'
+    },
+};
+*/
 
 const server = new ApolloServer({
     typeDefs: schema,
