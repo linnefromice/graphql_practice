@@ -67,6 +67,12 @@ const resolvers = {
         },
         users: () => {
             return Object.values(users);
+        },
+        messages: () => {
+            return Object.values(messages);
+        },
+        message: (parent, { id }) => {
+            return messages[id];
         }
     },
     User: {
