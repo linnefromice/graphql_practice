@@ -20,6 +20,7 @@ const schema = gql`
     type Message {
         id: ID!
         text: String!
+        user: User!
     }
 `;
 let messages = {
@@ -78,6 +79,11 @@ const resolvers = {
     User: {
         username: user => {
             return user.username;
+        }
+    },
+    Message: {
+        user: (parent, args, { me }) => {
+            return me;
         }
     }
 };
