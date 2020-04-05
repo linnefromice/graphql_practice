@@ -22,6 +22,16 @@ const schema = gql`
         text: String!
     }
 `;
+let messages = {
+    1: {
+        id: '1',
+        text: 'Hello World',
+    },
+    2: {
+        id: '2',
+        text: 'By World'
+    },
+}
 let users = {
     1: {
         id: '1',
