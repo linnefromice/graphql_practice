@@ -16,6 +16,7 @@ const schema = gql`
     type User {
         id: ID!
         username: String!
+        messages: [Message!]
     }
     type Message {
         id: ID!
@@ -38,23 +39,28 @@ let messages = {
 let users = {
     1: {
         id: '1',
-        username: 'Robin Wieruch'
+        username: 'Robin Wieruch',
+        messageIds: [1],
     },
     2: {
         id: '2',
-        username: 'Dave David'
+        username: 'Dave David',
+        messageIds: [2],
     },
     3: {
         id: '3',
-        username: 'Mike Ross'
+        username: 'Mike Ross',
+        messageIds: [],
     },
     4: {
         id: '4',
-        username: 'Harvey Specter'
+        username: 'Harvey Specter',
+        messageIds: [],
     },
     5: {
         id: '5',
-        username: 'Rachel Zane'
+        username: 'Rachel Zane',
+        messageIds: [],
     }
 };
 const resolvers = {
@@ -79,8 +85,10 @@ const resolvers = {
         }
     },
     User: {
-        username: user => {
-            return user.username;
+        messages: user => {
+            return Object.values(messages).filter(
+                message => messages.userId === user.id,
+            );
         }
     },
     Message: {
