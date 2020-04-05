@@ -22,6 +22,18 @@ let users = {
     2: {
         id: '2',
         username: 'Dave David'
+    },
+    3: {
+        id: '3',
+        username: 'Mike Ross'
+    },
+    4: {
+        id: '4',
+        username: 'Harvey Specter'
+    },
+    5: {
+        id: '5',
+        username: 'Rachel Zane'
     }
 };
 const me = users[1];
