@@ -6,8 +6,10 @@ const app = express();
 const schema = gql`
     type Query {
         me: User
+        user: User
     }
     type User {
+        id: ID!
         username: String!
     }
 `;
@@ -17,16 +19,14 @@ const resolvers = {
             return {
                 username: 'Robin Wieruch',
             }
+        },
+        user: () => {
+            return {
+                username: 'Dave Davids',
+            }
         }
     }
 };
-/*
-const datas = {
-    me: {
-        username: 'Robin Wierich'
-    },
-};
-*/
 
 const server = new ApolloServer({
     typeDefs: schema,
