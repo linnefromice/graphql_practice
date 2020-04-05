@@ -1,6 +1,5 @@
 const express = require('express');
-const ApolloServer = require('apollo-server-express').ApolloServer;
-const gql = require('apollo-server-express').gql;
+const { ApolloServer, gql } = require('apollo-server-express');
 
 const app = express();
 
