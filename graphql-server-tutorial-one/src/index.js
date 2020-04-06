@@ -1,5 +1,6 @@
 const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
+const uuidv4 = require('uuid/v4');
 
 const app = express();
 
@@ -89,7 +90,9 @@ const resolvers = {
     },
     Mutation: {
         createMessage: (parent, { text }, { me }) => {
+            const id = uuidv4();
             const message = {
+                id,
                 text,
                 userId: me.id,
             };
