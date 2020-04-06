@@ -96,6 +96,10 @@ const resolvers = {
                 text,
                 userId: me.id,
             };
+
+            message[id] = message;
+            users[me.id].messageIds.push(id);
+
             return message;
         }
     },
