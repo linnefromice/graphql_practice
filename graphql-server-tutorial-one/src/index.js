@@ -13,6 +13,9 @@ const schema = gql`
         messages: [Message!]!
         message(id: ID!): Message!
     }
+    type Mutation {
+        createMessage(text: String!): Message!
+    }
     type User {
         id: ID!
         username: String!
