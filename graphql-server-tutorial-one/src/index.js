@@ -87,6 +87,15 @@ const resolvers = {
             return messages[id];
         }
     },
+    Mutation: {
+        createMessage: (parent, { text }, { me }) => {
+            const message = {
+                text,
+                userId: me.id,
+            };
+            return message;
+        }
+    },
     User: {
         messages: user => {
             return Object.values(messages).filter(
