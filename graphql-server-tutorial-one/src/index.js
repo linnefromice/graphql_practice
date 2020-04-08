@@ -12,8 +12,8 @@ const resolvers = {
         me: (parent, args, { me }) => {
             return me;
         },
-        mike: () => {
-            return model.users[3];
+        mike: (parent, args, { mike }) => {
+            return mike;
         },
         user: (parent, { id }) => {
             return model.users[id];
@@ -70,6 +70,7 @@ const server = new ApolloServer({
     resolvers,
     context: {
         me: model.users[1],
+        mike: model.users[3],
     }
 });
 

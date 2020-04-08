@@ -37,7 +37,7 @@ let messages = {
       text: 'By World',
       userId: '2',
   },
-}
+};
 
 module.exports = {
   users,
