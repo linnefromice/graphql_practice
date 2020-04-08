@@ -3,34 +3,9 @@ const { ApolloServer, gql } = require('apollo-server-express');
 const uuidv4 = require('uuid/v4');
 
 const model = require('./model');
+const schema = require('./schema');
 
 const app = express();
-
-const schema = gql`
-    type Query {
-        users: [User!]
-        me: User
-        mike: User
-        user(id: ID!): User
-
-        messages: [Message!]!
-        message(id: ID!): Message!
-    }
-    type Mutation {
-        createMessage(text: String!): Message!
-        deleteMessage(id: ID!): Boolean!
-    }
-    type User {
-        id: ID!
-        username: String!
-        messages: [Message!]
-    }
-    type Message {
-        id: ID!
-        text: String!
-        user: User!
-    }
-`;
 
 const resolvers = {
     Query: {
