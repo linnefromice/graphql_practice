@@ -1,0 +1,5 @@
+sources:
+  - name: Qiita
+    handler:
+      openapi:
+        source: ./definition/qiita.openapi.yaml

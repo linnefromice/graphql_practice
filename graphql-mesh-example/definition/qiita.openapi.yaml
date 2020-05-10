@@ -1,0 +1,206 @@
+swagger: "2.0"
+
+info:
+  version: 0.0.1
+  title: Qiita API
+
+host: "qiita.com"
+
+basePath: "/api/v2"
+
+schemes:
+  - https
+
+consumes:
+  - application/json
+
+produces:
+  - application/json
+
+paths:
+  "/tags/{tagId}/items":
+    get:
+      parameters:
+        - in: path
+          name: tagId
+          type: string
+          required: true
+        - $ref: "#/parameters/pageParam"
+        - $ref: "#/parameters/perPageParam"
+      responses:
+        "200":
+          description: 指定されたタグが付けられた投稿一覧を、タグを付けた日時の降順で返します。
+          schema:
+            title: タグ記事一覧
+            type: array
+            items:
+              $ref: "#/definitions/Item"
+  "/users/{userId}":
+    get:
+      parameters:
+        - in: path
+          name: userId
+          type: string
+          required: true
+      responses:
+        "200":
+          description: ユーザを取得します。
+          schema:
+            $ref: "#/definitions/User"
+  "/users/{userId}/items":
+    get:
+      parameters:
+        - in: path
+          name: userId
+          type: string
+          required: true
+        - $ref: "#/parameters/pageParam"
+        - $ref: "#/parameters/perPageParam"
+      responses:
+        "200":
+          description: ユーザの投稿の一覧を作成日時の降順で返します。
+          schema:
+            title: ユーザー記事一覧
+            type: array
+            items:
+              $ref: "#/definitions/Item"
+  "/items":
+    get:
+      parameters:
+        - $ref: "#/parameters/pageParam"
+        - $ref: "#/parameters/perPageParam"
+        - name: query
+          in: query
+          description: 検索クエリ
+          required: false
+          type: string
+      responses:
+        "200":
+          description: 投稿の一覧を作成日時の降順で返します。
+          schema:
+            title: 記事一覧
+            type: array
+            items:
+              $ref: "#/definitions/Item"
+parameters:
+  pageParam:
+    in: query
+    name: page
+    description: ページ番号 (1から100まで)
+    type: number
+  perPageParam:
+    in: query
+    name: per_page
+    description: 1ページあたりに含まれる要素数 (1から100まで)
+    type: number
+definitions:
+  ErrorMessage:
+    description: エラーの内容を説明するmessageプロパティと、エラーの種類を表すtypeプロパティで構成されます
+    type: object
+    properties:
+      message:
+        type: string
+      type:
+        type: string
+  Group:
+    description: "Qiita:Teamのグループを表します。"
+    type: object
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      private:
+        type: boolean
+      updated_at:
+        type: string
+      url_name:
+        type: string
+  Tag:
+    description: タグ
+    properties:
+      name:
+        type: string
+        example: Ruby
+      versions:
+        type: array
+        items:
+          type: string
+          example: 0.0.1
+  User:
+    properties:
+      description:
+        description: 自己紹介文
+        type: string
+      facebook_id:
+        type: string
+      followees_count:
+        description: このユーザがフォローしているユーザの数
+        type: integer
+      followers_count:
+        description: このユーザをフォローしているユーザの数
+        type: integer
+      github_login_name:
+        type: string
+      id:
+        type: string
+      items_count:
+        description: "このユーザが qiita.com 上で公開している投稿の数 (Qiita:Teamでの投稿数は含まれません)"
+        type: integer
+      linkedin_id:
+        type: string
+      location:
+        type: string
+      name:
+        type: string
+      organization:
+        type: string
+      permanent_id:
+        description: ユーザごとに割り当てられる整数のID
+        type: integer
+      profile_image_url:
+        description: 設定しているプロフィール画像のURL
+        type: string
+      twitter_screen_name:
+        type: string
+      website_url:
+        type: string
+  Item:
+    type: object
+    properties:
+      rendered_body:
+        type: string
+      body:
+        type: string
+      coediting:
+        type: boolean
+      comments_count:
+        type: integer
+      created_at:
+        type: string
+      id:
+        type: string
+      likes_count:
+        type: string
+      private:
+        type: boolean
+      reactions_count:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+      url:
+        type: string
+      page_views_count:
+        type: integer
+      tags:
+        type: array
+        items:
+          $ref: "#/definitions/Tag"
+      user:
+        $ref: "#/definitions/User"
+      group:
+        $ref: "#/definitions/Group"
