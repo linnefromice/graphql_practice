@@ -46,12 +46,11 @@ const messages: Messages = {
     userId: '2'
   },
   '3': {
-    id: '2',
+    id: '3',
     text: 'With TypeScript.',
-    userId: '3'
+    userId: '2'
   },
 }
-
 
 const schema = gql`
   type Query {
@@ -65,6 +64,7 @@ const schema = gql`
   type User {
     id: ID!
     username: String!
+    messages: [Message!]
   }
   type Message {
     id: ID!
@@ -88,7 +88,11 @@ const resolvers: IResolvers = {
     message: (parent, { id }) => messages[id] || null
   },
   User: {
-    username: (user: User) => `${user.firstName} ${user.lastName}`
+    username: (user: User) => `${user.firstName} ${user.lastName}`,
+    messages: (user: User) =>
+      Object.values(messages)
+        .filter(m => +m.userId === +user.id)
+        .map(m => messages[m.id]),
   },
   Message: {
     user: (message: Message, args) => users[message.userId]
