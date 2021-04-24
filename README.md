@@ -6,6 +6,10 @@
 
 ## graphql-meth-example
 
+## ts-apollo-server-express-one
+
+https://suzukalight.com/blog/posts/2019-12-08-graphql-server
+
 ### Reference
 
 - [github - apollographql/fullstack-tutorial](https://github.com/apollographql/fullstack-tutorial)
