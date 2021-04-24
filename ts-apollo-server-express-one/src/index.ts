@@ -13,6 +13,14 @@ interface User {
 interface Users {
   [key: string]: User;
 }
+interface Message {
+  id: string;
+  text: string;
+  userId: string;
+}
+interface Messages {
+  [key: string]: Message;
+}
 const users: Users = {
   '1': {
     id: '1',
@@ -26,17 +34,42 @@ const users: Users = {
   },
 }
 const me = users[1];
+const messages: Messages = {
+  '1': {
+    id: '1',
+    text: 'Hello, World!',
+    userId: '1'
+  },
+  '2': {
+    id: '2',
+    text: 'from GraphQL and Apollo-Server.',
+    userId: '2'
+  },
+  '3': {
+    id: '2',
+    text: 'With TypeScript.',
+    userId: '3'
+  },
+}
+
 
 const schema = gql`
   type Query {
     me: User
     users: [User!]
     user(id: ID!): User
+    messages: [Message!]
+    message(id: ID!): Message
     author: Author
   }
   type User {
     id: ID!
     username: String!
+  }
+  type Message {
+    id: ID!
+    text: String!
+    user: User!
   }
   type Author {
     name: String!
@@ -51,9 +84,14 @@ const resolvers: IResolvers = {
     users: () => Object.values(users),
     user: (parent, { id }) => users[id] || null,
     author: (parent, args, context) => context.author,
+    messages: () => Object.values(messages),
+    message: (parent, { id }) => messages[id] || null
   },
   User: {
     username: (user: User) => `${user.firstName} ${user.lastName}`
+  },
+  Message: {
+    user: (message: Message, args) => users[message.userId]
   }
 }
 
