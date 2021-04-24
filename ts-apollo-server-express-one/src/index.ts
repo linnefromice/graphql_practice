@@ -32,10 +32,16 @@ const schema = gql`
     me: User
     users: [User!]
     user(id: ID!): User
+    author: Author
   }
   type User {
     id: ID!
     username: String!
+  }
+  type Author {
+    name: String!
+    date: String!
+    country: String!
   }
 `
 
@@ -43,7 +49,8 @@ const resolvers: IResolvers = {
   Query: {
     me: () => me,
     users: () => Object.values(users),
-    user: (parent, { id }) => users[id] || null
+    user: (parent, { id }) => users[id] || null,
+    author: (parent, args, context) => context.author,
   },
   User: {
     username: (user: User) => `${user.firstName} ${user.lastName}`
@@ -53,6 +60,13 @@ const resolvers: IResolvers = {
 const server = new ApolloServer({
   typeDefs: schema,
   resolvers,
+  context: {
+    author: {
+      name: "linnefromice",
+      date: "2021/04/01",
+      country: "Japan"
+    }
+  }
 })
 
 server.applyMiddleware({ app, path: '/graphql' })
