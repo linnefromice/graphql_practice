@@ -7,14 +7,23 @@ app.use(cors())
 
 interface User {
   id: string;
-  username: string;
+  firstName: String
+  lastName: String
 }
 interface Users {
   [key: string]: User;
 }
 const users: Users = {
-  '1': { id: '1', username: 'mkubara' },
-  '2': { id: '2', username: 'suzukalight' },
+  '1': {
+    id: '1',
+    firstName: 'Miyuki',
+    lastName: 'Watanabe'
+  },
+  '2': {
+    id: '2',
+    firstName: 'Sayaka',
+    lastName: 'Yamamoto'
+  },
 }
 const me = users[1];
 
@@ -35,6 +44,9 @@ const resolvers: IResolvers = {
     me: () => me,
     users: () => Object.values(users),
     user: (parent, { id }) => users[id] || null
+  },
+  User: {
+    username: (user: User) => `${user.firstName} ${user.lastName}`
   }
 }
 
