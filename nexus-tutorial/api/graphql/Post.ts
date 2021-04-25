@@ -19,24 +19,11 @@ export const Post = objectType({
 export const PostQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.nonNull.list.field('drafts', {
+    t.list.field('drafts', {
       type: 'Post',
-      resolve() {
-        return [
-          {
-            id: 1,
-            title: 'Nexus 1st',
-            body: 'Hello, World!',
-            published: false
-          },
-          {
-            id: 2,
-            title: 'Nexus 2nd',
-            body: 'from GraphQL and Apollo-Server.',
-            published: false
-          },
-        ]
-      }
+      resolve(_root, _args, ctx) {
+        return ctx.db.posts.filter(p => p.published === false)
+      } 
     })
   }
 })
