@@ -24,6 +24,12 @@ export const PostQuery = extendType({
       resolve(_root, _args, ctx) {
         return ctx.db.posts.filter(p => p.published === false)
       } 
+    }),
+    t.list.field('posts', {
+      type: 'Post',
+      resolve(_root, _args, ctx) {
+        return ctx.db.posts.filter(p => p.published === true)
+      }
     })
   }
 })
