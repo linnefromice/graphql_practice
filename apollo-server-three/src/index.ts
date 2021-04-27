@@ -32,12 +32,12 @@ const comments: Comment[] = [
     content: 'content 1',
   },
   {
-    todoid: '2',
+    todoid: '1',
     commentid: '2',
     content: 'content 2',
   },
   {
-    todoid: '3',
+    todoid: '5',
     commentid: '3',
     content: 'content 3',
   },
@@ -45,21 +45,45 @@ const comments: Comment[] = [
 const todos: Todo[] = [
   {
     id: '1',
+    name: 'TODO name 1',
+    description: 'TODO description 1',
+    priority: 1,
+    status: TodoStatus.done,
   },
   {
     id: '2',
+    name: 'TODO name 2',
+    description: 'TODO description 2',
+    priority: 2,
+    status: TodoStatus.pending,
   },
   {
     id: '3',
+    name: 'TODO name 3',
+    description: 'TODO description 3',
+    priority: 3,
+    status: TodoStatus.done,
   },
   {
     id: '4',
+    name: 'TODO name 4',
+    description: 'TODO description 4',
+    priority: 4,
+    status: TodoStatus.pending,
   },
   {
     id: '5',
+    name: 'TODO name 5',
+    description: 'TODO description 5',
+    priority: 5,
+    status: TodoStatus.done,
   },
   {
     id: '6',
+    name: 'TODO name 6',
+    description: 'TODO description 6',
+    priority: 6,
+    status: TodoStatus.pending,
   },
 ];
 
@@ -85,6 +109,10 @@ const resolvers = {
     addComment: async (parent: any, args: any, context: any) => {
       return {};
     },
+  },
+  Todo: {
+    comments: (todo: Todo, args: any) =>
+      comments.filter((comment) => comment.todoid === todo.id),
   },
 };
 
