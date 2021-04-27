@@ -104,7 +104,16 @@ const resolvers = {
   },
   Mutation: {
     addTodo: async (parent: any, args: any, context: any) => {
-      return {};
+      const { id, name, description, priority, status } = args;
+      const todo: Todo = {
+        id,
+        name,
+        description,
+        priority,
+        status,
+      };
+      todos.push(todo);
+      return todo;
     },
     addComment: async (parent: any, args: any, context: any) => {
       return {};
