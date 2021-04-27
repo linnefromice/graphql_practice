@@ -3,8 +3,8 @@ import fs from 'fs';
 
 type ID = string;
 enum TodoStatus {
-  done,
-  pending,
+  done = 'done',
+  pending = 'pending',
 }
 interface Comment {
   todoid: ID;
