@@ -69,12 +69,13 @@ const resolvers = {
     getTodos: (parent: any, args: any, context: any) => {
       const { limit, nextToken } = args;
       const index = todos.findIndex((todo) => todo.id === nextToken);
-      const result = todos.slice(index, index + limit);
+      const resultTodos = todos.slice(index, index + limit);
 
-      return {
-        todos: result,
+      const response: TodoConnection = {
+        todos: resultTodos,
         nextToken: todos[index + limit]?.id,
       };
+      return response;
     },
   },
   Mutation: {
