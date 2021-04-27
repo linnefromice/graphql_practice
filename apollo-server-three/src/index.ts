@@ -27,18 +27,18 @@ interface TodoConnection {
 // DataSource
 const comments: Comment[] = [
   {
-    todoid: '1',
     commentid: '1',
+    todoid: '1',
     content: 'content 1',
   },
   {
-    todoid: '1',
     commentid: '2',
+    todoid: '1',
     content: 'content 2',
   },
   {
-    todoid: '5',
     commentid: '3',
+    todoid: '5',
     content: 'content 3',
   },
 ];
@@ -116,7 +116,14 @@ const resolvers = {
       return todo;
     },
     addComment: async (parent: any, args: any, context: any) => {
-      return {};
+      const { todoid, content } = args;
+      const comment: Comment = {
+        commentid: String(comments.length),
+        todoid: todoid,
+        content: content,
+      };
+      comments.push(comment);
+      return comment;
     },
   },
   Todo: {
