@@ -15,7 +15,16 @@ it("ensures that a draft can be created and published", async () => {
     }
   `);
   // Snapshot that draft and expect `published` to be false
-  expect(draftResult).toMatchInlineSnapshot();
+  expect(draftResult).toMatchInlineSnapshot(`
+    Object {
+      "createDraft": Object {
+        "body": "...",
+        "id": 1,
+        "published": false,
+        "title": "Nexus",
+      },
+    }
+  `);
   // Publish the previously created draft
   const publishResult = await ctx.client.request(
     `
@@ -31,5 +40,14 @@ it("ensures that a draft can be created and published", async () => {
     { draftId: draftResult.createDraft.id }
   );
   // Snapshot the published draft and expect `published` to be true
-  expect(publishResult).toMatchInlineSnapshot();
+  expect(publishResult).toMatchInlineSnapshot(`
+    Object {
+      "publish": Object {
+        "body": "...",
+        "id": 1,
+        "published": true,
+        "title": "Nexus",
+      },
+    }
+  `);
 });
