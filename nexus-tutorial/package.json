@@ -4,16 +4,39 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "2.21.2",
     "apollo-server": "^2.23.0",
     "graphql": "^15.5.0",
     "nexus": "^1.0.0"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@types/sqlite3": "^3.1.7",
+    "get-port": "^5.1.1",
+    "graphql-request": "^3.4.0",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "prisma": "2.21.2",
+    "sqlite3": "^5.0.2",
+    "ts-jest": "^26.5.5",
     "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.4"
   },
   "scripts": {
     "dev": "ts-node-dev --transpile-only --no-notify api/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "generate": "ts-node-dev --transpile-only api/schema",
+    "test": "npm run generate && jest"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "globals": {
+      "ts-jest": {
+        "diagnostics": {
+          "warnOnly": true
+        }
+      }
+    },
+    "testEnvironment": "node"
   }
 }
