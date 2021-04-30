@@ -19,7 +19,7 @@ it("ensures that a draft can be created and published", async () => {
     Object {
       "createDraft": Object {
         "body": "...",
-        "id": 1,
+        "id": 6,
         "published": false,
         "title": "Nexus",
       },
@@ -44,13 +44,52 @@ it("ensures that a draft can be created and published", async () => {
     Object {
       "publish": Object {
         "body": "...",
-        "id": 1,
+        "id": 6,
         "published": true,
         "title": "Nexus",
       },
     }
   `);
 
-  const persistedData = await ctx.db.post.findMany()
-  expect(persistedData).toMatchInlineSnapshot()
+  const persistedData = await ctx.db.post.findMany();
+  expect(persistedData).toMatchInlineSnapshot(`
+    Array [
+      Object {
+        "body": "GraphQL & ORM",
+        "id": 1,
+        "published": false,
+        "title": "First Nexus & Prisma",
+      },
+      Object {
+        "body": "GraphQL & ORM",
+        "id": 2,
+        "published": true,
+        "title": "First Nexus & Prisma",
+      },
+      Object {
+        "body": "GraphQL & ORM",
+        "id": 3,
+        "published": false,
+        "title": "First Nexus & Prisma",
+      },
+      Object {
+        "body": "...",
+        "id": 4,
+        "published": true,
+        "title": "Nexus",
+      },
+      Object {
+        "body": "...",
+        "id": 5,
+        "published": true,
+        "title": "Nexus",
+      },
+      Object {
+        "body": "...",
+        "id": 6,
+        "published": true,
+        "title": "Nexus",
+      },
+    ]
+  `);
 });

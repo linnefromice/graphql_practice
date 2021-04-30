@@ -21,6 +21,10 @@ function graphqlTestContext() {
     async before() {
       const port = await getPort({ port: makeRange(4000, 6000) });
       serverInstance = await server.listen({ port });
+      // Close the Prisma Client connection when the Apollo Server is closed
+      serverInstance.server.on("close", async () => {
+        db.$disconnect()
+      });
       return new GraphQLClient(`http://localhost:${port}`);
     },
     async after() {
@@ -42,7 +46,7 @@ function prismaTestContext() {
     },
     async after() {
       // Drop the schema after the tests have completed
-      const client = new Database(':memory');
+      const client = new Database(':memory:');
       await client.close();
       // Release the Prisma Client connection
       await prismaClient?.$disconnect();
