@@ -50,4 +50,7 @@ it("ensures that a draft can be created and published", async () => {
       },
     }
   `);
+
+  const persistedData = await ctx.db.post.findMany()
+  expect(persistedData).toMatchInlineSnapshot()
 });
