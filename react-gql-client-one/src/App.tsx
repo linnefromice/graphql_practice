@@ -1,6 +1,29 @@
 import { VFC } from 'react';
+import { gql } from '@apollo/client';
 import logo from './logo.svg';
 import './App.css';
+
+const GET_DRAFTS = gql`
+  query drafts {
+    drafts {
+      id
+      title
+      body
+      published
+    }
+  }
+`;
+
+const GET_POSTS = gql`
+  query posts {
+    posts {
+      id
+      title
+      body
+      published
+    }
+  }
+`;
 
 const App: VFC = () => (
   <div className="App">
