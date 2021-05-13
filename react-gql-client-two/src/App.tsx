@@ -6,6 +6,10 @@ import {
   DraftsRequestComponent,
   PostsRequestComponent,
 } from './components/UseRequestComponent';
+import {
+  DraftsReactApolloComponent,
+  PostsReactApolloComponent,
+} from './components/UseReactApolloComponent';
 
 const GET_DRAFTS = gql`
   query drafts {
@@ -80,6 +84,11 @@ const App: VFC = () => (
     <DraftsRequestComponent />
     <h4>Posts</h4>
     <PostsRequestComponent />
+    <h3>use typescript-react-apollo</h3>
+    <h4>Drafts</h4>
+    <DraftsReactApolloComponent />
+    <h4>Posts</h4>
+    <PostsReactApolloComponent />
   </div>
 );
 
