@@ -2,6 +2,10 @@ import { VFC } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import './App.css';
 import { Query, Post } from './graphql/__generated__/operations/graphql';
+import {
+  DraftsRequestComponent,
+  PostsRequestComponent,
+} from './components/UseRequestComponent';
 
 const GET_DRAFTS = gql`
   query drafts {
@@ -13,7 +17,6 @@ const GET_DRAFTS = gql`
     }
   }
 `;
-
 const GET_POSTS = gql`
   query posts {
     posts {
@@ -24,7 +27,6 @@ const GET_POSTS = gql`
     }
   }
 `;
-
 const DraftsComponent: VFC = () => {
   const { loading, error, data } = useQuery<Query>(GET_DRAFTS);
   if (loading) return <p>Loading...</p>;
@@ -45,7 +47,6 @@ const DraftsComponent: VFC = () => {
     </ul>
   );
 };
-
 const PostsComponent: VFC = () => {
   const { loading, error, data } = useQuery<Query>(GET_POSTS);
   if (loading) return <p>Loading...</p>;
@@ -69,10 +70,16 @@ const PostsComponent: VFC = () => {
 
 const App: VFC = () => (
   <div>
+    <h3>use typescript-operations</h3>
     <h4>Drafts</h4>
     <DraftsComponent />
     <h4>Posts</h4>
     <PostsComponent />
+    <h3>use typescript-graphql-request</h3>
+    <h4>Drafts</h4>
+    <DraftsRequestComponent />
+    <h4>Posts</h4>
+    <PostsRequestComponent />
   </div>
 );
 
