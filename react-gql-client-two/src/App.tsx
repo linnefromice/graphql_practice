@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import './App.css';
-import { Query, Post } from './graphql/__generated__/graphql';
+import { Query, Post } from './graphql/__generated__/operations/graphql';
 
 const GET_DRAFTS = gql`
   query drafts {
