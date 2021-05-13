@@ -48,6 +48,57 @@ export type Query = {
   posts?: Maybe<Array<Maybe<Post>>>;
 };
 
+export type GetDraftsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetDraftsQuery = { __typename?: 'Query' } & {
+  drafts?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: 'Post' } & Pick<
+          Post,
+          'id' | 'title' | 'body' | 'published'
+        >
+      >
+    >
+  >;
+};
+
+export type GetPostsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetPostsQuery = { __typename?: 'Query' } & {
+  posts?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: 'Post' } & Pick<
+          Post,
+          'id' | 'title' | 'body' | 'published'
+        >
+      >
+    >
+  >;
+};
+
+export const GetDraftsDocument = gql`
+  query getDrafts {
+    drafts {
+      id
+      title
+      body
+      published
+    }
+  }
+`;
+export const GetPostsDocument = gql`
+  query getPosts {
+    posts {
+      id
+      title
+      body
+      published
+    }
+  }
+`;
+
 export type SdkFunctionWrapper = <T>(
   action: (requestHeaders?: Record<string, string>) => Promise<T>,
   operationName: string
@@ -59,6 +110,33 @@ export function getSdk(
   client: GraphQLClient,
   withWrapper: SdkFunctionWrapper = defaultWrapper
 ) {
-  return {};
+  return {
+    getDrafts(
+      variables?: GetDraftsQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<GetDraftsQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetDraftsQuery>(GetDraftsDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'getDrafts'
+      );
+    },
+    getPosts(
+      variables?: GetPostsQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<GetPostsQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetPostsQuery>(GetPostsDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'getPosts'
+      );
+    },
+  };
 }
 export type Sdk = ReturnType<typeof getSdk>;

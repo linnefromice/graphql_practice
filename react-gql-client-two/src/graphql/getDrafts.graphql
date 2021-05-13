@@ -1,0 +1,8 @@
+query getDrafts {
+  drafts {
+    id
+    title
+    body
+    published
+  }
+}
