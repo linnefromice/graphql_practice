@@ -6,10 +6,12 @@ import {
 
 export const DraftsReactApolloComponent: VFC = () => {
   const { data } = useGetDraftsQuery();
+  if (!data) return <></>;
 
   return (
     <ul>
-      {data!.drafts!.map((draft) => {
+      {data.drafts!.map((draft) => {
+        // eslint-disable-line
         if (!draft) return <></>;
         const { id, title, body, published } = draft;
         return (
@@ -23,10 +25,12 @@ export const DraftsReactApolloComponent: VFC = () => {
 };
 export const PostsReactApolloComponent: VFC = () => {
   const { data } = useGetPostsQuery();
+  if (!data) return <></>;
 
   return (
     <ul>
-      {data!.posts!.map((post) => {
+      {data.posts!.map((post) => {
+        // eslint-disable-line
         if (!post) return <></>;
         const { id, title, body, published } = post;
         return (
