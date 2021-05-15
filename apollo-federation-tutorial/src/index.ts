@@ -1,7 +1,8 @@
 import { ApolloServer } from 'apollo-server';
 import { ApolloGateway } from '@apollo/gateway';
+import { readFileSync } from 'fs';
 
-const supergraphSchema = '';
+const supergraphSchema = readFileSync('./supergraph.graphql').toString();
 const gateway = new ApolloGateway({
   supergraphSdl: supergraphSchema,
 });
