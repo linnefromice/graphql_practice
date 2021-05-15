@@ -1,0 +1,9 @@
+subgraphs:
+  products:
+    routing_url: https://rover.apollo.dev/quickstart/products/graphql
+    schema:
+      file: ./products.graphql
+  reviews:
+    routing_url: https://rover.apollo.dev/quickstart/reviews/graphql
+    schema:
+      file: ./reviews.graphql
