@@ -1,7 +1,8 @@
 import { VFC } from 'react';
-import { useQuery, gql } from '@apollo/client';
-import './App.css';
-import { Query, Post } from './graphql/__generated__/operations/graphql';
+import {
+  DraftsComponent,
+  PostsComponent
+} from './components/UseOnlyTypeComponent';
 import {
   DraftsRequestComponent,
   PostsRequestComponent,
@@ -9,68 +10,8 @@ import {
 import {
   DraftsReactApolloComponent,
   PostsReactApolloComponent,
+  MutationReactApolloComponent
 } from './components/UseReactApolloComponent';
-
-const GET_DRAFTS = gql`
-  query drafts {
-    drafts {
-      id
-      title
-      body
-      published
-    }
-  }
-`;
-const GET_POSTS = gql`
-  query posts {
-    posts {
-      id
-      title
-      body
-      published
-    }
-  }
-`;
-const DraftsComponent: VFC = () => {
-  const { loading, error, data } = useQuery<Query>(GET_DRAFTS);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.toString()}</p>;
-  if (!data) return <div>Error : data is undefined</div>;
-
-  return (
-    <ul>
-      {data.drafts!.map((draft) => {
-        if (!draft) return <></>;
-        const { id, title, body, published }: Post = draft;
-        return (
-          <li key={`draft.${id!.toString()}`}>
-            {`${title!} / ${body!} / ${published ? 'Published' : 'Draft'}`}
-          </li>
-        );
-      })}
-    </ul>
-  );
-};
-const PostsComponent: VFC = () => {
-  const { loading, error, data } = useQuery<Query>(GET_POSTS);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.toString()}</p>;
-  if (!data) return <div>Error : data is undefined</div>;
-
-  return (
-    <ul>
-      {data.posts!.map((post) => {
-        if (!post) return <></>;
-        const { id, title, body, published }: Post = post;
-        return (
-          <li key={`post.${id!.toString()}`}>
-            {`${title!} / ${body!} / ${published ? 'Published' : 'Draft'}`}
-          </li>
-        );
-      })}
-    </ul>
-  );
-};
 
 const App: VFC = () => (
   <div>
@@ -89,6 +30,8 @@ const App: VFC = () => (
     <DraftsReactApolloComponent />
     <h4>Posts</h4>
     <PostsReactApolloComponent />
+    <h4>Mutation</h4>
+    <MutationReactApolloComponent />
   </div>
 );
 

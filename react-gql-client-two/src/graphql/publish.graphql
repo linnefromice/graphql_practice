@@ -1,0 +1,8 @@
+mutation Publish($draftId: Int!) {
+  publish(draftId: $draftId) {
+    id
+    title
+    body
+    published
+  }
+}

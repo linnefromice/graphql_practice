@@ -8,12 +8,11 @@ export const DraftsRequestComponent: VFC = () => {
   useEffect(() => {
     const fetch = async () => {
       const response = await sdk.getDrafts();
-      // eslint-disable-next-line
-      const datas: Post[] = response!.drafts!.map((d) => ({
-        id: d?.id,
-        title: d?.title,
-        body: d?.body,
-        published: d?.published,
+      const datas: Post[] = response.drafts.map((d) => ({
+        id: d.id,
+        title: d.title,
+        body: d.body,
+        published: d.published,
       }));
       setDrafts(datas);
     };
@@ -23,10 +22,9 @@ export const DraftsRequestComponent: VFC = () => {
   return (
     <ul>
       {drafts.map((draft) => {
-        if (!draft) return <></>;
         const { id, title, body, published }: Post = draft;
         return (
-          <li key={`draft.${id!.toString()}`}>
+          <li key={`draft.${id.toString()}`}>
             {`${title!} / ${body!} / ${published ? 'Published' : 'Draft'}`}
           </li>
         );
@@ -39,12 +37,11 @@ export const PostsRequestComponent: VFC = () => {
   useEffect(() => {
     const fetch = async () => {
       const response = await sdk.getPosts();
-      // eslint-disable-next-line
-      const datas: Post[] = response!.posts!.map((d) => ({
-        id: d?.id,
-        title: d?.title,
-        body: d?.body,
-        published: d?.published,
+      const datas: Post[] = response.posts.map((d) => ({
+        id: d.id,
+        title: d.title,
+        body: d.body,
+        published: d.published,
       }));
       setPosts(datas);
     };
@@ -54,10 +51,9 @@ export const PostsRequestComponent: VFC = () => {
   return (
     <ul>
       {posts.map((post) => {
-        if (!post) return <></>;
         const { id, title, body, published }: Post = post;
         return (
-          <li key={`post.${id!.toString()}`}>
+          <li key={`post.${id.toString()}`}>
             {`${title!} / ${body!} / ${published ? 'Published' : 'Draft'}`}
           </li>
         );
