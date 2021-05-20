@@ -1,15 +1,10 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
-
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions = {};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -25,10 +20,12 @@ export type Mutation = {
   publish?: Maybe<Post>;
 };
 
+
 export type MutationCreateDraftArgs = {
   title: Scalars['String'];
   body: Scalars['String'];
 };
+
 
 export type MutationPublishArgs = {
   draftId: Scalars['Int'];
@@ -36,7 +33,7 @@ export type MutationPublishArgs = {
 
 export type Post = {
   __typename?: 'Post';
-  id?: Maybe<Scalars['Int']>;
+  id: Scalars['Int'];
   title?: Maybe<Scalars['String']>;
   body?: Maybe<Scalars['String']>;
   published?: Maybe<Scalars['Boolean']>;
@@ -44,50 +41,43 @@ export type Post = {
 
 export type Query = {
   __typename?: 'Query';
-  drafts?: Maybe<Array<Maybe<Post>>>;
-  posts?: Maybe<Array<Maybe<Post>>>;
+  drafts: Array<Post>;
+  posts: Array<Post>;
 };
 
-export type GetDraftsQueryVariables = Exact<{ [key: string]: never }>;
+export type GetDraftsQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type GetDraftsQuery = { __typename?: 'Query' } & {
-  drafts?: Maybe<
-    Array<
-      Maybe<
-        { __typename?: 'Post' } & Pick<
-          Post,
-          'id' | 'title' | 'body' | 'published'
-        >
-      >
-    >
-  >;
-};
 
-export type GetPostsQueryVariables = Exact<{ [key: string]: never }>;
+export type GetDraftsQuery = (
+  { __typename?: 'Query' }
+  & { drafts: Array<(
+    { __typename?: 'Post' }
+    & Pick<Post, 'id' | 'title' | 'body' | 'published'>
+  )> }
+);
 
-export type GetPostsQuery = { __typename?: 'Query' } & {
-  posts?: Maybe<
-    Array<
-      Maybe<
-        { __typename?: 'Post' } & Pick<
-          Post,
-          'id' | 'title' | 'body' | 'published'
-        >
-      >
-    >
-  >;
-};
+export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPostsQuery = (
+  { __typename?: 'Query' }
+  & { posts: Array<(
+    { __typename?: 'Post' }
+    & Pick<Post, 'id' | 'title' | 'body' | 'published'>
+  )> }
+);
+
 
 export const GetDraftsDocument = gql`
-  query getDrafts {
-    drafts {
-      id
-      title
-      body
-      published
-    }
+    query getDrafts {
+  drafts {
+    id
+    title
+    body
+    published
   }
-`;
+}
+    `;
 
 /**
  * __useGetDraftsQuery__
@@ -104,45 +94,27 @@ export const GetDraftsDocument = gql`
  *   },
  * });
  */
-export function useGetDraftsQuery(
-  baseOptions?: Apollo.QueryHookOptions<GetDraftsQuery, GetDraftsQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetDraftsQuery, GetDraftsQueryVariables>(
-    GetDraftsDocument,
-    options
-  );
-}
-export function useGetDraftsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetDraftsQuery,
-    GetDraftsQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetDraftsQuery, GetDraftsQueryVariables>(
-    GetDraftsDocument,
-    options
-  );
-}
+export function useGetDraftsQuery(baseOptions?: Apollo.QueryHookOptions<GetDraftsQuery, GetDraftsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetDraftsQuery, GetDraftsQueryVariables>(GetDraftsDocument, options);
+      }
+export function useGetDraftsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDraftsQuery, GetDraftsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetDraftsQuery, GetDraftsQueryVariables>(GetDraftsDocument, options);
+        }
 export type GetDraftsQueryHookResult = ReturnType<typeof useGetDraftsQuery>;
-export type GetDraftsLazyQueryHookResult = ReturnType<
-  typeof useGetDraftsLazyQuery
->;
-export type GetDraftsQueryResult = Apollo.QueryResult<
-  GetDraftsQuery,
-  GetDraftsQueryVariables
->;
+export type GetDraftsLazyQueryHookResult = ReturnType<typeof useGetDraftsLazyQuery>;
+export type GetDraftsQueryResult = Apollo.QueryResult<GetDraftsQuery, GetDraftsQueryVariables>;
 export const GetPostsDocument = gql`
-  query getPosts {
-    posts {
-      id
-      title
-      body
-      published
-    }
+    query getPosts {
+  posts {
+    id
+    title
+    body
+    published
   }
-`;
+}
+    `;
 
 /**
  * __useGetPostsQuery__
@@ -159,32 +131,14 @@ export const GetPostsDocument = gql`
  *   },
  * });
  */
-export function useGetPostsQuery(
-  baseOptions?: Apollo.QueryHookOptions<GetPostsQuery, GetPostsQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetPostsQuery, GetPostsQueryVariables>(
-    GetPostsDocument,
-    options
-  );
-}
-export function useGetPostsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetPostsQuery,
-    GetPostsQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetPostsQuery, GetPostsQueryVariables>(
-    GetPostsDocument,
-    options
-  );
-}
+export function useGetPostsQuery(baseOptions?: Apollo.QueryHookOptions<GetPostsQuery, GetPostsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPostsQuery, GetPostsQueryVariables>(GetPostsDocument, options);
+      }
+export function useGetPostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPostsQuery, GetPostsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPostsQuery, GetPostsQueryVariables>(GetPostsDocument, options);
+        }
 export type GetPostsQueryHookResult = ReturnType<typeof useGetPostsQuery>;
-export type GetPostsLazyQueryHookResult = ReturnType<
-  typeof useGetPostsLazyQuery
->;
-export type GetPostsQueryResult = Apollo.QueryResult<
-  GetPostsQuery,
-  GetPostsQueryVariables
->;
+export type GetPostsLazyQueryHookResult = ReturnType<typeof useGetPostsLazyQuery>;
+export type GetPostsQueryResult = Apollo.QueryResult<GetPostsQuery, GetPostsQueryVariables>;
