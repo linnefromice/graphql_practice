@@ -3,7 +3,7 @@ import { extendType, nonNull, objectType, stringArg, intArg } from "nexus"
 export const Post = objectType({
   name: 'Post',
   definition(t) {
-    t.int('id'),
+    t.nonNull.int('id'),
     t.string('title'),
     t.string('body'),
     t.boolean('published')
@@ -19,14 +19,14 @@ export const Post = objectType({
 export const PostQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.list.field('drafts', {
-      type: 'Post',
+    t.nonNull.list.field('drafts', {
+      type: nonNull('Post'),
       resolve(_root, _args, ctx) {
         return ctx.db.post.findMany({ where: { published: false } })
       } 
     }),
-    t.list.field('posts', {
-      type: 'Post',
+    t.nonNull.list.field('posts', {
+      type: nonNull('Post'),
       resolve(_root, _args, ctx) {
         return ctx.db.post.findMany({ where: { published: true } })
       }
