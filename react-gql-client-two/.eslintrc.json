@@ -28,6 +28,7 @@
   ],
   "rules": {
     "no-use-before-define": "off",
+    "import/newline-after-import": "off",
     "import/extensions": [
       "error",
       {

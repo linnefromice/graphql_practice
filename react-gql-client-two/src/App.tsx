@@ -10,6 +10,7 @@ import {
 import {
   DraftsReactApolloComponent,
   PostsReactApolloComponent,
+  MutationReactApolloComponent
 } from './components/UseReactApolloComponent';
 
 const App: VFC = () => (
@@ -29,6 +30,8 @@ const App: VFC = () => (
     <DraftsReactApolloComponent />
     <h4>Posts</h4>
     <PostsReactApolloComponent />
+    <h4>Mutation</h4>
+    <MutationReactApolloComponent />
   </div>
 );
 
