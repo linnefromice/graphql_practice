@@ -10,12 +10,10 @@ export const DraftsReactApolloComponent: VFC = () => {
 
   return (
     <ul>
-      {data.drafts!.map((draft) => {
-        // eslint-disable-line
-        if (!draft) return <></>;
+      {data.drafts.map((draft) => {
         const { id, title, body, published } = draft;
         return (
-          <li key={`draft.${id!.toString()}`}>
+          <li key={`draft.${id.toString()}`}>
             {`${title!} / ${body!} / ${published ? 'Published' : 'Draft'}`}
           </li>
         );
@@ -29,12 +27,10 @@ export const PostsReactApolloComponent: VFC = () => {
 
   return (
     <ul>
-      {data.posts!.map((post) => {
-        // eslint-disable-line
-        if (!post) return <></>;
+      {data.posts.map((post) => {
         const { id, title, body, published } = post;
         return (
-          <li key={`post.${id!.toString()}`}>
+          <li key={`post.${id.toString()}`}>
             {`${title!} / ${body!} / ${published ? 'Published' : 'Draft'}`}
           </li>
         );

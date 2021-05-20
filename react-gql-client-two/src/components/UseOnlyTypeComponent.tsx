@@ -30,11 +30,10 @@ export const DraftsComponent: VFC = () => {
 
   return (
     <ul>
-      {data.drafts!.map((draft) => {
-        if (!draft) return <></>;
+      {data.drafts.map((draft) => {
         const { id, title, body, published }: Post = draft;
         return (
-          <li key={`draft.${id!.toString()}`}>
+          <li key={`draft.${id.toString()}`}>
             {`${title!} / ${body!} / ${published ? 'Published' : 'Draft'}`}
           </li>
         );
@@ -50,11 +49,10 @@ export const PostsComponent: VFC = () => {
 
   return (
     <ul>
-      {data.posts!.map((post) => {
-        if (!post) return <></>;
+      {data.posts.map((post) => {
         const { id, title, body, published }: Post = post;
         return (
-          <li key={`post.${id!.toString()}`}>
+          <li key={`post.${id.toString()}`}>
             {`${title!} / ${body!} / ${published ? 'Published' : 'Draft'}`}
           </li>
         );
